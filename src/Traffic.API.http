@@ -1,0 +1,6 @@
+@Traffic.API_HostAddress = http://localhost:5018
+
+GET {{Traffic.API_HostAddress}}/traffic/
+Accept: application/json
+
+###
