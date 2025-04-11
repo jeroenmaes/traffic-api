@@ -1,6 +1,6 @@
 namespace Traffic.API
 {
-    public class Traffic
+    public class TrafficDto
     {
         public double Amount { get; set; } = -1;
         public string Unit { get; set; } = "Kilometers";

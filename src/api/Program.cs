@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using HealthChecks.UI.Client;
+using Traffic.Shared;
 
 namespace Traffic.API
 {
@@ -27,6 +28,7 @@ namespace Traffic.API
             builder.Services.AddOpenApi();
             
             builder.Services.AddHttpClient("verkeerscentrum");
+            builder.Services.AddTransient<TrafficProxy, TrafficProxy>();
 
             builder.Services.AddHealthChecks();
             builder.Services.AddMemoryCache();
