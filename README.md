@@ -44,3 +44,9 @@ The solution contains 3 projects:
 ## Question 5: "Any improvements?"
 
 ![alt text](img/image-4.png)
+
+
+# TODO
+- Explore possibilities of hosting an MCP server in Azure
+- Explore the Azure API Managent MCP capabilities
+
