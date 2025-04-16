@@ -29,6 +29,7 @@ namespace Traffic.API
             
             builder.Services.AddHttpClient("verkeerscentrum");
             builder.Services.AddTransient<TrafficProxy, TrafficProxy>();
+            builder.Services.AddTransient<ForecastProxy, ForecastProxy>();
 
             builder.Services.AddHealthChecks();
             builder.Services.AddMemoryCache();

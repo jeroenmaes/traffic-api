@@ -21,8 +21,7 @@ namespace Traffic.API.Controllers
         [OutputCache(PolicyName = "Expire30")]
         public async Task<TrafficDto> Get()
         {                       
-            var traffic = await _proxy.GetTraffic();
-            return traffic;
+            return await _proxy.GetTrafficAsync();
         }
     }
 }
