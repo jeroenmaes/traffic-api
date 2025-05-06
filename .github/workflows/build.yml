@@ -10,9 +10,7 @@ on:
     branches: [ "main" ]
 
 env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
-
+  REGISTRY: ghcr.io  
 jobs:
   build:
 
@@ -39,5 +37,5 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
     - name: Publish
-      run: dotnet publish /t:PublishContainer -r linux-x64 -p ContainerRegistry=${{ env.REGISTRY }}
+      run: dotnet publish /t:PublishContainer -r linux-x64 -p ContainerRegistry=${{env.REGISTRY}}
 
