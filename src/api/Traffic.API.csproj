@@ -7,7 +7,7 @@
     <UserSecretsId>1ff94225-733d-4603-929e-e2d3ea05d59a</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
-    <ContainerRepository>traffic-api</ContainerRepository>
+    <ContainerRepository>jeroenmaes/traffic-api</ContainerRepository>
   </PropertyGroup>
 
   <ItemGroup>
