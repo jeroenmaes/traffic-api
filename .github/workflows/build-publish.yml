@@ -33,5 +33,5 @@ jobs:
     - name: Log in to the Container registry
       run: docker login ${{ env.REGISTRY }} -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}      
     - name: Publish
-      run: dotnet publish /t:PublishContainer -r linux-x64 -p ContainerRegistry=${{ env.REGISTRY }}  
+      run: dotnet publish /t:PublishContainer -r linux-x64 -p ContainerRegistry=${{ env.REGISTRY }} /p:ContainerImageTags='"1.0.0.${{ github.run_number }};latest"'
 
