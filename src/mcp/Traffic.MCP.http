@@ -1,6 +1,0 @@
-@Traffic.MCP_HostAddress = http://localhost:5238
-
-GET {{Traffic.MCP_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
