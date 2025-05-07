@@ -5,9 +5,9 @@ VisualStudioVersion = 17.12.35506.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Traffic.API", "api\Traffic.API.csproj", "{A8F1A522-FC27-4551-B7DF-B759069F0ECD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Traffic.Shared", "shared\Traffic.Shared\Traffic.Shared.csproj", "{FB5B045A-11FB-449A-8947-C94C32535BE9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Traffic.Shared", "shared\Traffic.Shared.csproj", "{FB5B045A-11FB-449A-8947-C94C32535BE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Traffic.MCP", "mcp\Traffic.MCP\Traffic.MCP.csproj", "{85C20B69-C3DF-40AE-9F23-6F5206E0ABC7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Traffic.MCP", "mcp\Traffic.MCP.csproj", "{85C20B69-C3DF-40AE-9F23-6F5206E0ABC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
