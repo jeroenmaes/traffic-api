@@ -7,6 +7,12 @@
     <UserSecretsId>0ff64a9a-3229-4d11-9700-9b1b598f3cd6</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
+    <RuntimeIdentifiers>linux-x64</RuntimeIdentifiers>
+    <EnableSdkContainerDebugging>True</EnableSdkContainerDebugging>
+	<ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:9.0</ContainerBaseImage>
+	<ContainerRepository>jeroenmaes/traffic-mcp</ContainerRepository>
+	<ContainerRegistry>ghcr.io</ContainerRegistry>
+
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +23,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\shared\Traffic.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ContainerPort Include="8081" />
   </ItemGroup>
 
 </Project>
