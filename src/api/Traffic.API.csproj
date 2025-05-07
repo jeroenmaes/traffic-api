@@ -10,6 +10,8 @@
     <RuntimeIdentifiers>linux-x64</RuntimeIdentifiers>
     <EnableSdkContainerDebugging>True</EnableSdkContainerDebugging>
     <ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:9.0</ContainerBaseImage>
+    <ContainerRepository>jeroenmaes/traffic-api</ContainerRepository>
+    <ContainerRegistry>ghcr.io</ContainerRegistry>  
   </PropertyGroup>
 
   <ItemGroup>
