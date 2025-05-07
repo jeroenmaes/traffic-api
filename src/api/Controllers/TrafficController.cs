@@ -1,12 +1,14 @@
 using HtmlAgilityPack;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
 using Traffic.Shared;
 
 namespace Traffic.API.Controllers
 {
+    [Authorize]
     [ApiController]
-    [Route("v1/[controller]")]
+    [Route("v1/[controller]")]    
     public class TrafficController : ControllerBase
     {
         private readonly TrafficProxy _proxy;

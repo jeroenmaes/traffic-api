@@ -1,11 +1,13 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
 using Traffic.Shared;
 
 namespace Traffic.API.Controllers
 {
+    [Authorize]
     [ApiController]
-    [Route("v1/[controller]")]
+    [Route("v1/[controller]")]    
     public class ForecastController : ControllerBase
     {
         private readonly ForecastProxy _proxy;

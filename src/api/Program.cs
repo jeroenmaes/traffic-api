@@ -4,6 +4,12 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using HealthChecks.UI.Client;
 using Traffic.Shared;
+using Ktos.AspNetCore.Authentication.ApiKeyHeader;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Configuration;
+using System.Runtime;
 
 namespace Traffic.API
 {
@@ -12,7 +18,16 @@ namespace Traffic.API
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-                        
+            builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true).AddEnvironmentVariables();
+
+            string? apiKey = builder.Configuration["ApiKey"];
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = ApiKeyHeaderAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = ApiKeyHeaderAuthenticationDefaults.AuthenticationScheme;
+            }).AddApiKeyHeaderAuthentication(options => { options.ApiKey = apiKey; options.Header = "X-API-KEY"; });
+
             builder.Services.AddControllers().AddJsonOptions(o =>
             {
                 o.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
@@ -25,8 +40,45 @@ namespace Traffic.API
                 o.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
             });
 
-            builder.Services.AddOpenApi();
-            
+            builder.Services.AddOpenApi(options =>
+            {
+                var scheme = new OpenApiSecurityScheme
+                {
+                    Name = "X-API-KEY",
+                    Type = SecuritySchemeType.ApiKey,
+                    In = ParameterLocation.Header,
+                    Description = "API Key authentication via 'X-API-KEY' header",
+                    Scheme = "ApiKeyScheme",
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "ApiKey"
+                    }
+                };
+
+                options.AddDocumentTransformer((document, context, ct) =>
+                {
+                    document.Components ??= new();
+                    document.Components.SecuritySchemes.Add("ApiKey", scheme);
+                    return Task.CompletedTask;
+                });
+
+                options.AddOperationTransformer((operation, context, ct) =>
+                {
+                    if (context.Description.ActionDescriptor.EndpointMetadata.OfType<IAuthorizeData>().Any())
+                    {
+                        operation.Security = new List<OpenApiSecurityRequirement>
+                        {
+                            new OpenApiSecurityRequirement
+                            {
+                                [scheme] = new List<string>()
+                            }
+                        };
+                    }
+                    return Task.CompletedTask;
+                });
+            });
+
             builder.Services.AddHttpClient("verkeerscentrum");
             builder.Services.AddTransient<TrafficProxy, TrafficProxy>();
             builder.Services.AddTransient<ForecastProxy, ForecastProxy>();
@@ -52,11 +104,12 @@ namespace Traffic.API
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers();
 
-            app.MapHealthChecks("/health", new HealthCheckOptions
+            app.MapHealthChecks("/v1/health", new HealthCheckOptions
             {
                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
             });
