@@ -12,7 +12,7 @@ namespace Traffic.MCP
             builder.Services.AddTransient<TrafficProxy, TrafficProxy>();
             builder.Services.AddProblemDetails();
 
-            builder.Services.AddMcpServer()                                
+            builder.Services.AddMcpServer().WithHttpTransport()                                
                 .WithTools<TrafficTool>();
 
             builder.Services.AddLogging((configure) =>
