@@ -6,7 +6,7 @@ using Traffic.Shared;
 
 namespace Traffic.API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("v1/[controller]")]    
     public class TrafficController : ControllerBase
