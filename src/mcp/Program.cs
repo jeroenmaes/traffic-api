@@ -22,8 +22,6 @@ namespace Traffic.MCP
 
             var app = builder.Build();
 
-            app.MapGet("/", () => $"Traffic.MCP");
-
             app.MapMcp();
             
             app.Run();
