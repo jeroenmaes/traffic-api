@@ -1,4 +1,4 @@
-using Traffic.Shared;
+using Traffic.APIClient;
 
 namespace Traffic.MCP
 {
@@ -8,8 +8,8 @@ namespace Traffic.MCP
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddHttpClient("verkeerscentrum");
-            builder.Services.AddTransient<TrafficProxy, TrafficProxy>();
+            // Add the Traffic API client
+            builder.Services.AddTrafficClient("http://localhost:5018");
             builder.Services.AddProblemDetails();
 
             builder.Services.AddMcpServer().WithHttpTransport()                                

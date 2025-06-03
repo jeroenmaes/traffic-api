@@ -24,10 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\shared\Traffic.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ContainerPort Include="8081" />
   </ItemGroup>
 

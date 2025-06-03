@@ -20,10 +20,8 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.2" />
     <PackageReference Include="ModelContextProtocol" Version="0.2.0-preview.2" />
     <PackageReference Include="ModelContextProtocol.AspNetCore" Version="0.2.0-preview.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\shared\Traffic.Shared.csproj" />
+  </ItemGroup>  <ItemGroup>
+    <ProjectReference Include="..\Traffic.APIClient\Traffic.APIClient.csproj" />
   </ItemGroup>
 
   <ItemGroup>

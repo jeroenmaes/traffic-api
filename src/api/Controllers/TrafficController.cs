@@ -2,7 +2,7 @@ using HtmlAgilityPack;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
-using Traffic.Shared;
+using Traffic.API.Data;
 
 namespace Traffic.API.Controllers
 {

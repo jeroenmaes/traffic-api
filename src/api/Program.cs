@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using HealthChecks.UI.Client;
-using Traffic.Shared;
+using Traffic.API.Data;
 using Ktos.AspNetCore.Authentication.ApiKeyHeader;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;

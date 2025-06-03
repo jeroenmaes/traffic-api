@@ -3,44 +3,48 @@
 Sample project to demonstrate an MCP server in AspNetCore.
 
 The solution contains 3 projects:
-- web api (with openapi support)
-- shared components (with proxy for verkeerscentrum.be)
+- web api (with openapi support and proxy for verkeerscentrum.be)
+- API client library (with client to consume Traffic API)
 - mcp server (using ModelContextProtocol.AspNetCore)
 
 ```mermaid
 graph TD
     subgraph "Traffic.API.sln"
         subgraph "Traffic.API Project"
-            API["Traffic.API"] --> TrafficCtrl["TrafficController.cs"] 
+            API["Traffic.API"] --> TrafficCtrl["TrafficController.cs"]
+            API --> TrafficDto["TrafficDto.cs"]
+            API --> TrafficProxy["TrafficProxy.cs"]
         end
-
-        subgraph "Traffic.Shared Project"
-            Shared["Traffic.Shared"] --> TrafficDto["TrafficDto.cs"]
-            Shared --> TrafficProxy["TrafficProxy.cs"]           
+        
+        subgraph "Traffic.APIClient Project"
+            APIClient["Traffic.APIClient"] --> IClient["ITrafficClient.cs"]
+            APIClient --> ClientImpl["TrafficClient.cs"]
         end
 
         subgraph "Traffic.MCP Project"
             MCP["Traffic.MCP"] --> MCPTool["TrafficTool.cs"]            
-        end      
-        API --> Shared
-        MCP --> Shared
+        end
+        
+        APIClient --> API
+        MCP --> APIClient
     end
 
     subgraph "MCP Clients"
         VSCode["VS Code"] --> MCP
         Claude["Claude Desktop"] --> MCP
     end
-
-    TrafficProxy --> ExternalAPI["verkeerscentrum.be<br/>(External API)"]
-
+      API --> ExternalAPI["verkeerscentrum.be<br/>(External API)"]
+    
     classDef project fill:#f9f,stroke:#333,stroke-width:2px;
     classDef file fill:#bbf,stroke:#333,stroke-width:1px;
     classDef folder fill:#ddf,stroke:#333,stroke-width:1px;
     classDef consumer fill:#afd,stroke:#333,stroke-width:2px;
     classDef external fill:#fda,stroke:#333,stroke-width:2px;
-
-    class API,MCP,Shared project;
-    class TrafficCtrl,TrafficDto,TrafficProxy,MCPTool file;
+    classDef boldProject fill:#f9f,stroke:#000,stroke-width:4px;
+    
+    class APIClient project;
+    class API,MCP boldProject;
+    class TrafficCtrl,TrafficDto,TrafficProxy,MCPTool,IClient,ClientImpl file;
     class VSCode,Claude consumer;
     class ExternalAPI external;
 ```
