@@ -14,24 +14,35 @@ graph TD
             API["Traffic.API"] --> TrafficCtrl["TrafficController.cs"] 
         end
 
-    subgraph "Traffic.Shared Project"
+        subgraph "Traffic.Shared Project"
             Shared["Traffic.Shared"] --> TrafficDto["TrafficDto.cs"]
             Shared --> TrafficProxy["TrafficProxy.cs"]           
         end
 
-    subgraph "Traffic.MCP Project"
+        subgraph "Traffic.MCP Project"
             MCP["Traffic.MCP"] --> MCPTool["TrafficTool.cs"]            
-    end      
+        end      
         API --> Shared
         MCP --> Shared
     end
 
+    subgraph "MCP Clients"
+        VSCode["VS Code"] --> MCP
+        Claude["Claude Desktop"] --> MCP
+    end
+
+    TrafficProxy --> ExternalAPI["verkeerscentrum.be<br/>(External API)"]
+
     classDef project fill:#f9f,stroke:#333,stroke-width:2px;
     classDef file fill:#bbf,stroke:#333,stroke-width:1px;
     classDef folder fill:#ddf,stroke:#333,stroke-width:1px;
+    classDef consumer fill:#afd,stroke:#333,stroke-width:2px;
+    classDef external fill:#fda,stroke:#333,stroke-width:2px;
 
     class API,MCP,Shared project;
     class TrafficCtrl,TrafficDto,TrafficProxy,MCPTool file;
+    class VSCode,Claude consumer;
+    class ExternalAPI external;
 ```
 
 # vscode config 
