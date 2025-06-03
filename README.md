@@ -7,6 +7,33 @@ The solution contains 3 projects:
 - shared components (with proxy for verkeerscentrum.be)
 - mcp server (using ModelContextProtocol.AspNetCore)
 
+```mermaid
+graph TD
+    subgraph "Traffic.API.sln"
+        subgraph "Traffic.API Project"
+            API["Traffic.API"] --> TrafficCtrl["TrafficController.cs"] 
+        end
+
+    subgraph "Traffic.Shared Project"
+            Shared["Traffic.Shared"] --> TrafficDto["TrafficDto.cs"]
+            Shared --> TrafficProxy["TrafficProxy.cs"]           
+        end
+
+    subgraph "Traffic.MCP Project"
+            MCP["Traffic.MCP"] --> MCPTool["TrafficTool.cs"]            
+    end      
+        API --> Shared
+        MCP --> Shared
+    end
+
+    classDef project fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef file fill:#bbf,stroke:#333,stroke-width:1px;
+    classDef folder fill:#ddf,stroke:#333,stroke-width:1px;
+
+    class API,MCP,Shared project;
+    class TrafficCtrl,TrafficDto,TrafficProxy,MCPTool file;
+```
+
 # vscode config 
 
 ```
