@@ -10,6 +10,7 @@ using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using System.Runtime;
+using Traffic.API.Monitors;
 
 namespace Traffic.API
 {
@@ -82,6 +83,8 @@ namespace Traffic.API
             builder.Services.AddHttpClient("verkeerscentrum");
             builder.Services.AddTransient<TrafficProxy, TrafficProxy>();
             builder.Services.AddTransient<ForecastProxy, ForecastProxy>();
+
+            builder.Services.AddHostedService<TrafficMonitor>();
 
             builder.Services.AddHealthChecks();
             builder.Services.AddMemoryCache();
