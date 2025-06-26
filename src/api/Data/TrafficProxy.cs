@@ -60,7 +60,7 @@ namespace Traffic.API.Data
                 var dataParts = rawData.Split("km");
                 if (dataParts.Length > 1)
                 {
-                    traffic.Amount = double.Parse(dataParts[0]);
+                    traffic.Amount = decimal.Parse(dataParts[0]);
                     traffic.Trend = dataParts[1].Replace("(", "").Replace(")", "").Trim();
                     traffic.TimestampUpdated = DateTime.UtcNow;
                 }
