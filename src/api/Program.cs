@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using System.Runtime;
 using Traffic.API.Monitors;
+using SlimMessageBus.Host;
+using SlimMessageBus.Host.AzureServiceBus;
+using SlimMessageBus.Host.Serialization.Json;
 
 namespace Traffic.API
 {
@@ -96,7 +99,19 @@ namespace Traffic.API
                 options.AddBasePolicy(policy => policy.Expire(TimeSpan.FromMinutes(10)));
                 options.AddPolicy("Expire30", builder => builder.Expire(TimeSpan.FromSeconds(30)));
             });
-            
+
+            builder.Services.AddSlimMessageBus(mbb =>
+            {
+                mbb.WithProviderServiceBus(cfg =>
+                {
+
+                    cfg.ConnectionString = builder.Configuration.GetValue<string>("AppConfig:ServiceBusConnectionString");
+                    mbb.Produce<TrafficChangedV1>(x => x.DefaultQueue(builder.Configuration.GetValue<string>("AppConfig:ServiceBusQueueName")));
+
+                });
+                mbb.AddJsonSerializer();
+            });
+
             var app = builder.Build();
 
             app.UseOutputCache();

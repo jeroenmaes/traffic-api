@@ -1,4 +1,5 @@
 ﻿
+using SlimMessageBus;
 using Traffic.API.Data;
 
 namespace Traffic.API.Monitors
@@ -8,12 +9,14 @@ namespace Traffic.API.Monitors
         private readonly ILogger<TrafficMonitor> _logger;       
         private readonly TrafficProxy _proxy;
         private TrafficDto? previousTraffic;
+        private readonly IMessageBus _bus;
 
-        public TrafficMonitor(ILogger<TrafficMonitor> logger, TrafficProxy proxy)
+        public TrafficMonitor(ILogger<TrafficMonitor> logger, TrafficProxy proxy, IMessageBus bus)
         {
             _logger = logger;
             _proxy = proxy;
             previousTraffic = new TrafficDto();
+            _bus = bus;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -31,7 +34,8 @@ namespace Traffic.API.Monitors
                     {
                         // Publish an event if there is a change
                         _logger.LogInformation("Traffic data has changed. Publishing event...");
-                        // TODO: Implement event publishing logic here
+
+                        await _bus.Publish(new TrafficChangedV1());
                     }
                     else
                     {
