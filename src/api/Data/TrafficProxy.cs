@@ -39,7 +39,6 @@ namespace Traffic.API.Data
                 if (trafficNode != null)
                 {
                     ParseTrafficData(trafficNode.InnerHtml.Trim(), traffic);
-                    _logger.LogInformation("Current Traffic Info: {Amount} km, Trend: {Trend}", traffic.Amount, traffic.Trend);
                 }
                 else
                 {

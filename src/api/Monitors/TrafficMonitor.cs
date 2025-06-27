@@ -34,8 +34,19 @@ namespace Traffic.API.Monitors
                     {
                         // Publish an event if there is a change
                         _logger.LogInformation("Traffic data has changed. Publishing event...");
-
-                        await _bus.Publish(new TrafficChangedV1());
+                        var changedEvent = new TrafficChangedV1()
+                        {
+                            CurrentAmount = currentTraffic.Amount,
+                            PreviousAmount = previousTraffic.Amount,
+                            Unit = currentTraffic.Unit,
+                            TimestampUpdated = currentTraffic.TimestampUpdated,
+                            Source = currentTraffic.Source,
+                            Trend = currentTraffic.Trend,
+                            Country = currentTraffic.Country,
+                            Region = currentTraffic.Region
+                        };
+                        _logger.LogInformation("Traffic Changed: {CurrentAmount} km, Previous Amount: {PreviousAmount} km, Trend: {Trend}", changedEvent.CurrentAmount, changedEvent.PreviousAmount, changedEvent.Trend);
+                        await _bus.Publish(changedEvent);
                     }
                     else
                     {
