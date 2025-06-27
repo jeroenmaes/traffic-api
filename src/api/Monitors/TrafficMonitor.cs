@@ -27,7 +27,7 @@ namespace Traffic.API.Monitors
                 {
                     
                     // Retrieve the current traffic data
-                    var currentTraffic = await _proxy.GetTrafficAsync();                    
+                    var currentTraffic = await _proxy.GetTrafficAsync("BE", "FL");                    
 
                     // Compare the previous with the current traffic data
                     if (previousTraffic.Amount != currentTraffic.Amount)

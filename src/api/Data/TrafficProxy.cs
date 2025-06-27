@@ -20,9 +20,14 @@ namespace Traffic.API.Data
         /// Retrieves the current traffic information.
         /// </summary>
         /// <returns>A <see cref="TrafficDto"/> containing the traffic information.</returns>
-        public async Task<TrafficDto> GetTrafficAsync()
+        public async Task<TrafficDto> GetTrafficAsync(string country, string region)
         {
-            var traffic = new TrafficDto();
+            var traffic = new TrafficDto
+            {
+                Country = "BE",
+                Region = "FL"
+            };
+
             string url = "https://www.verkeerscentrum.be/filebarometer?var=" + DateTime.UtcNow.Ticks;
             try
             {

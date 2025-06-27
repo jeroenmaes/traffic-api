@@ -21,9 +21,9 @@ namespace Traffic.API.Controllers
         [Route("")]
         [HttpGet]
         [OutputCache(PolicyName = "Expire30")]
-        public async Task<TrafficDto> Get()
+        public async Task<TrafficDto> Get(string country = "BE", string region = "FL")
         {                       
-            return await _proxy.GetTrafficAsync();
+            return await _proxy.GetTrafficAsync(country, region);
         }
     }
 }

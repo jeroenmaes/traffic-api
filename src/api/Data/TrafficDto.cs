@@ -7,5 +7,7 @@ namespace Traffic.API.Data
         public DateTime TimestampUpdated { get; set; } = DateTime.Parse("1900-01-01T01:00:00");
         public string Source { get; set; } = "verkeerscentrum.be";
         public string Trend { get; set; }
+        public string Country { get; set; }
+        public string Region { get; set; }
     }
 }
